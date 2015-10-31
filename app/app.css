@@ -28,3 +28,15 @@
   content: "";
   padding: 0;
 }
+
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+#main{
+  margin: 0;
+  height: 100%;
+}
+
+.angular-google-map-container { height: 100vh; }
