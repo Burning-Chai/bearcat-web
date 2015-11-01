@@ -42,3 +42,19 @@ html, body {
 .angular-google-map-container { height: 100vh; }
 
 .gm-style-iw div {overflow:visible !important;}
+
+#profile-img{
+  padding: 5px;
+}
+
+#cogfig-icon{
+  padding: 10px;
+  margin-right: 25px;
+  width: 35px;
+  height: 35px;
+  font-size: 25px;
+}
+
+#nav-main{
+  margin-bottom: 0px;
+}
