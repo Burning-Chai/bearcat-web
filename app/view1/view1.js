@@ -19,23 +19,40 @@ angular.module('myApp.view1', ['ngRoute'])
 
         $scope.map = {
             center: {
-                latitude: 35,
-                longitude: 139
+                latitude: 35.71628,
+                longitude: 139.76207
             },
-            zoom: 8,
+            zoom: 9,
         };
     // $scope.pushDoc = pushDoc;
 
-    $scope.getFavoritePlaces = getFavoritePlaces;
+    $scope.Restaurant = Restaurant;
     $scope.getHotel = getHotel;
     $scope.getAttraction = getAttraction;
     $scope.getEmergency = getEmergency;
     $scope.wifimarkers = [];
     $scope.datas = [];
-    $scope.addData = function(data) {
-        console.log("dasfadf");
-        console.log(data);
+    $scope.selected = false;
+    $scope.namesavelist = "";
 
+    $scope.save = function() {
+        console.log("save");
+        var doc = {}
+        doc._id = $scope.namesavelist;
+        doc.docs = $scope.datas;
+
+        $http.post(baseURL + "bearcat/", doc, {})
+            .then(function successCallback(response) {
+                console.info(response);
+            }, function errorCallback(response) {
+                console.error(response);
+            })
+    }
+    $scope.addData = function() {
+        console.log("dasfadf");
+        $scope.datas.push($scope.selected)
+        $scope.selected = false
+        console.log($scope.datas);
     }
     uiGmapGoogleMapApi.then(function(maps) {
         maps.events = {
@@ -48,15 +65,25 @@ angular.module('myApp.view1', ['ngRoute'])
         }
     });
 
+    function eventClick(map, eventName, args) {
+        console.log(map)
+        var selectItem = {
+            id: map.key,
+            position: map.position
+        }
+        console.log(selectItem);
+        $scope.selected = selectItem;
+    }
+
     function getEmergency() {
         console.log("getEmergency");
         $http({
             method: "GET",
             url: baseURL + "bearcat/_all_docs"
         }).then(function successCallback(response) {
-            $scope.markers = [{
+            var markers = [{
                 id: 111,
-                name: "aaaa",
+                name: "1",
                 coords: {
                     latitude: 35.123,
                     longitude: 139.12,
@@ -66,13 +93,9 @@ angular.module('myApp.view1', ['ngRoute'])
                         url: "images/emergency_icon.png",
                         scaledSize: new google.maps.Size(24, 24)
                     }
-
                 },
                 events: {
-                    click: function(map, eventName, args) {
-                        console.log(args);
-                        $scope.datas.push(this)
-                    }
+                    click: eventClick,
                 }
             }, {
                 id: 222,
@@ -88,12 +111,11 @@ angular.module('myApp.view1', ['ngRoute'])
                     }
                 },
                 events: {
-                    click: function(map, eventName, args) {
-                        console.log(dbclick);
-                    }
+                    click: eventClick
                 }
             }];
-            // $scope.wifimarkers = response
+            $scope.markers = markers
+                // $scope.wifimarkers = response
         }, function errorCallback(response) {
             console.error("error: ", response)
         })
@@ -107,10 +129,10 @@ angular.module('myApp.view1', ['ngRoute'])
         }).then(function successCallback(response) {
             $scope.markers = [{
                 id: 111,
-                name: "べとなむちゃん",
+                name: "東大正門",
                 coords: {
-                    latitude: 35.123,
-                    longitude: 139.12,
+                    latitude: 35.7162867089299,
+                    longitude: 139.760372489691,
                 },
                 options: {
                     icon: {
@@ -118,20 +140,42 @@ angular.module('myApp.view1', ['ngRoute'])
                         scaledSize: new google.maps.Size(24, 24)
                     }
 
+                },
+                events: {
+                    click: eventClick
                 }
 
             }, {
                 id: 222,
-                name: "東京大学",
+                name: "三四郎池 ",
                 coords: {
-                    latitude: 35.42,
-                    longitude: 139.45,
+                    latitude: 35.7121489092729,
+                    longitude: 139.762071669102,
                 },
                 options: {
                     icon: {
                         url: "images/attraction.png",
                         scaledSize: new google.maps.Size(24, 24)
                     }
+                },
+                events: {
+                    click: eventClick
+                }
+            }, {
+                id: 333,
+                name: "三好晋六郎像  ",
+                coords: {
+                    latitude: 35.7149800585638,
+                    longitude: 139.759174883366,
+                },
+                options: {
+                    icon: {
+                        url: "images/attraction.png",
+                        scaledSize: new google.maps.Size(24, 24)
+                    }
+                },
+                events: {
+                    click: eventClick
                 }
             }];
             // $scope.wifimarkers = response
@@ -147,11 +191,11 @@ angular.module('myApp.view1', ['ngRoute'])
             url: baseURL + "bearcat/_all_docs"
         }).then(function successCallback(response) {
             $scope.markers = [{
-                id: 111,
-                name: "べとなむちゃん",
+                id: 11111,
+                name: "ホテル機山館",
                 coords: {
-                    latitude: 35.123,
-                    longitude: 139.12,
+                    latitude: 35.4228644,
+                    longitude: 139.4535216,
                 },
                 options: {
                     icon: {
@@ -159,20 +203,42 @@ angular.module('myApp.view1', ['ngRoute'])
                         scaledSize: new google.maps.Size(24, 24)
                     }
 
+                },
+                events: {
+                    click: eventClick
                 }
 
             }, {
-                id: 222,
-                name: "東京大学",
+                id: 22222,
+                name: "フォーレスト本郷",
                 coords: {
-                    latitude: 35.42,
-                    longitude: 139.45,
+                    latitude: 35.4247636,
+                    longitude: 139.4529787,
                 },
                 options: {
                     icon: {
                         url: "images/hotel_icon.png",
                         scaledSize: new google.maps.Size(24, 24)
                     }
+                },
+                events: {
+                    click: eventClick
+                }
+            }, {
+                id: 33333,
+                name: "鳳明館台町別館",
+                coords: {
+                    latitude: 35.4240634,
+                    longitude: 139.4523473,
+                },
+                options: {
+                    icon: {
+                        url: "images/hotel_icon.png",
+                        scaledSize: new google.maps.Size(24, 24)
+                    }
+                },
+                events: {
+                    click: eventClick
                 }
             }];
             // $scope.wifimarkers = response
@@ -181,18 +247,18 @@ angular.module('myApp.view1', ['ngRoute'])
         })
     }
 
-    function getFavoritePlaces() {
+    function Restaurant() {
         console.log("getFavoritePlaces");
         $http({
             method: "GET",
             url: baseURL + "bearcat/_all_docs"
         }).then(function successCallback(response) {
-            $scope.markers = [{
-                id: 111,
-                name: "べとなむちゃん",
+            var markers = [{
+                id: 1111,
+                name: "東大生協 第2食堂",
                 coords: {
-                    latitude: 35.123,
-                    longitude: 139.12,
+                    latitude: 35.7135840967522,
+                    longitude: 139.764478951693,
                 },
                 options: {
                     icon: {
@@ -200,22 +266,45 @@ angular.module('myApp.view1', ['ngRoute'])
                         scaledSize: new google.maps.Size(24, 24)
                     }
 
+                },
+                events: {
+                    click: eventClick
                 }
 
             }, {
-                id: 222,
-                name: "東京大学",
+                id: 2222,
+                name: "ナマステ本郷三丁目店",
                 coords: {
-                    latitude: 35.42,
-                    longitude: 139.45,
+                    latitude: 35.7071440624271,
+                    longitude: 139.760389924049,
                 },
                 options: {
                     icon: {
                         url: "images/restaurant_icon.png",
                         scaledSize: new google.maps.Size(24, 24)
                     }
+                },
+                events: {
+                    click: eventClick
                 }
-            }];
+            }, {
+                id: 3333,
+                name: "レストラン アブルボア",
+                coords: {
+                    latitude: 35.717854661088,
+                    longitude: 139.761658608913,
+                },
+                options: {
+                    icon: {
+                        url: "images/restaurant_icon.png",
+                        scaledSize: new google.maps.Size(24, 24)
+                    }
+                },
+                events: {
+                    click: eventClick
+                }
+            }]
+            $scope.markers = markers;
             // $scope.wifimarkers = response
         }, function errorCallback(response) {
             console.error("error: ", response)
@@ -231,5 +320,15 @@ angular.module('myApp.view1', ['ngRoute'])
     //             console.error(response);
     //         })
     // }
+
+
+    function filterName(arr, key) {
+        for (var i = 0; i < arr.length; i++) {
+            var item = arr[i];
+            if (item.id == key) {
+                return item.name
+            };
+        }
+    }
 
 }]);
