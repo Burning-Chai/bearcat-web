@@ -24,10 +24,11 @@ angular.module('myApp.view1', ['ngRoute'])
             },
             zoom: 8,
         };
-
+    $scope.getFavoritePlaces = getFavoritePlaces;
+    $scope.getHotel = getHotel;
+    $scope.getAttraction = getAttraction;
+    $scope.getEmergency = getEmergency;
     $scope.wifimarkers = [];
-
-    getFavoritePlaces();
 
     uiGmapGoogleMapApi.then(function(maps) {
         maps.events = {
@@ -40,7 +41,19 @@ angular.module('myApp.view1', ['ngRoute'])
         }
     });
 
+    function getEmergency (){
+    	console.log("getEmergency");
+    }
+
+    function getAttraction(){
+    	console.log("getAttraction");
+    }
+
+    function getHotel(){
+    	console.log("getHotel");
+    }
     function getFavoritePlaces() {
+    	console.log("getFavoritePlaces");
         $http({
             method: "GET",
             url: baseURL + "bearcat/_all_docs"
@@ -54,8 +67,8 @@ angular.module('myApp.view1', ['ngRoute'])
                 },
                 options: {
                     icon: {
-                        url: "images/restaurent.png",
-                        scaledSize: new google.maps.Size(34, 44)
+                        url: "images/restaurant.png",
+                      //  scaledSize: new google.maps.Size(34, 44)
                     }
 
                 }
@@ -69,8 +82,8 @@ angular.module('myApp.view1', ['ngRoute'])
                 },
                 options: {
                     icon: {
-                        url: "images/restaurent.png",
-                        scaledSize: new google.maps.Size(34, 44)
+                        url: "images/restaurant.png",
+                      //  scaledSize: new google.maps.Size(34, 44)
                     }
                 }
             }];
@@ -79,16 +92,4 @@ angular.module('myApp.view1', ['ngRoute'])
             console.error("error: ", response)
         })
     }
-
-    function getWifies() {
-        $http({
-            method: "GET",
-            url: baseURL + "bearcat/_all_docs"
-        }).then(function successCallback(response) {
-            // $scope.wifimarkers = response
-        }, function errorCallback(response) {
-            console.error("error: ", response)
-        })
-    }
-
 }]);
