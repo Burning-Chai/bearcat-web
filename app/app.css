@@ -58,3 +58,23 @@ html, body {
 #nav-main{
   margin-bottom: 0px;
 }
+
+#panel-new-list{
+  position: absolute;
+  right: 4px;
+  top: 55px;
+  z-index: 100;
+  width: 360px;
+}
+
+#panel-new-list-desc{
+  margin-top: 5px;
+}
+
+#panel-new-item{
+  position: absolute;
+  right: 4px;
+  top: 200px;
+  z-index: 100;
+  width: 360px;
+}

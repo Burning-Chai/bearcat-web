@@ -7,10 +7,11 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <ul class="nav navbar-nav">
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Restaurant<span class="caret"></span></a>
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                   aria-expanded="false">Restaurant<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="" ng-click="getFavoritePlaces()">Restaurant</a></li>
-                    <li><a href=""ng-click="getHotel()">Hotel</a></li>
+                    <li><a href="" ng-click="getHotel()">Hotel</a></li>
                     <li><a href="" ng-click="getAttraction()">Attraction</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="" ng-click="getEmergency()">Emergency</a></li>
@@ -36,13 +37,39 @@
         </ul>
     </div>
     <!-- /.container-fluid -->
+    <div id="panel-new-list" class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col col-md-4">
+                    <img src="../public/akamon.jpg" class="img-rounded" width="100" height="100">
+                </div>
+                <div class="col col-md-8">
+                    <input type="text" class="form-control" placeholder="Name...">
+
+                    <p id="panel-new-list-desc">
+                        <span class="glyphicon glyphicon-map-marker"/> 14
+                    </p>
+                    <button class="btn btn-success btn-sm pull-right">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="panel-new-item" class="panel panel-default">
+        <div class="panel-body">
+            <b>Name</b>
+            <button class="pull-right btn btn-success btn-sm">
+                <span class="glyphicon glyphicon-plus"></span></button>
+        </div>
+    </div>
 </nav>
 <ui-gmap-google-map center='map.center' zoom='map.zoom'>
     <div ng-repeat="marker in markers">
         <ui-gmap-marker options="marker.options" coords="marker.coords" events="marker.events" idkey="marker.id">
             <ui-gmap-window options='windowOptions' templateUrl='view1/windowtemplates/wifi_template.html'>
                 <div>
-                    <div><img class="pull-left" src="images/restaurent.png" class="img-rounded" alt="Cinque Terre" style="height:40px; width: 40px;"></div>
+                    <div><img class="pull-left" src="images/restaurent.png" class="img-rounded" alt="Cinque Terre"
+                              style="height:40px; width: 40px;"></div>
                     <div style="height:40px !important; width: 150px;"><b>{{marker.name}}</b></div>
                 </div>
             </ui-gmap-window>
