@@ -10,7 +10,7 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Restaurant<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="" ng-click="getFavoritePlaces()">Restaurant</a></li>
-                    <li><a href=""ng-click="getHotel()">Hotel</a></li>
+                    <li><a href="" ng-click="getHotel()">Hotel</a></li>
                     <li><a href="" ng-click="getAttraction()">Attraction</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="" ng-click="getEmergency()">Emergency</a></li>
@@ -43,7 +43,9 @@
             <ui-gmap-window options='windowOptions' templateUrl='view1/windowtemplates/wifi_template.html'>
                 <div>
                     <div><img class="pull-left" src="images/restaurent.png" class="img-rounded" alt="Cinque Terre" style="height:40px; width: 40px;"></div>
+                    <div tyle="height:40px; width: 5px;"></div>
                     <div style="height:40px !important; width: 150px;"><b>{{marker.name}}</b></div>
+                    <button onclick="(function(e){ console.log(e); }).bind(this)">Add</button>
                 </div>
             </ui-gmap-window>
         </ui-gmap-marker>
