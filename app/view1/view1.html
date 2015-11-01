@@ -2,8 +2,7 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar">Restaurant</span>
                 <span class="icon-bar">Hotel</span>
@@ -11,14 +10,12 @@
             </button>
             <a class="navbar-brand" href="#">MMaps</a>
         </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
         <ul class="nav navbar-nav">
             <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
             <li><a href="#">Link</a></li>
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                   aria-expanded="false">Dropdown <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="#">Action</a></li>
                     <li><a href="#">Another action</a></li>
@@ -39,8 +36,7 @@
         <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Link</a></li>
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                   aria-expanded="false">Dropdown <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="#">Action</a></li>
                     <li><a href="#">Another action</a></li>
@@ -55,9 +51,12 @@
 </nav>
 <ui-gmap-google-map center='map.center' zoom='map.zoom'>
     <div ng-repeat="marker in markers">
-        <ui-gmap-marker coords="marker.coords" events="marker.events" idkey="marker.id">
+        <ui-gmap-marker options="marker.options" coords="marker.coords" events="marker.events" idkey="marker.id">
             <ui-gmap-window options='windowOptions' templateUrl='view1/windowtemplates/wifi_template.html'>
-                <div>{{wifi.coords}}</div>
+                <div>
+                    <div><img class="pull-left" src="images/restaurent.png" class="img-rounded" alt="Cinque Terre" style="height:40px; width: 40px;"></div>
+                    <div style="height:40px !important; width: 150px;"><b>{{marker.name}}</b></div>
+                </div>
             </ui-gmap-window>
         </ui-gmap-marker>
     </div>

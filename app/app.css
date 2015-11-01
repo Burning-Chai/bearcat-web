@@ -40,3 +40,5 @@ html, body {
 }
 
 .angular-google-map-container { height: 100vh; }
+
+.gm-style-iw div {overflow:visible !important;}

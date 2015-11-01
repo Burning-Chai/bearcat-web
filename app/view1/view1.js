@@ -10,75 +10,85 @@ angular.module('myApp.view1', ['ngRoute'])
 }])
 
 .controller('View1Ctrl', ['$scope', '$http', 'uiGmapGoogleMapApi', function($scope, $http, uiGmapGoogleMapApi) {
-	var baseURL = "http://52.68.184.153:4984/";
+    var baseURL = "http://52.68.184.153:4984/";
 
-    $scope.map = {
-        center: {
-            latitude: 35,
-            longitude: 139
+
+    $scope.storedPlace = {
+
         },
-        zoom: 8,
-    };
+
+        $scope.map = {
+            center: {
+                latitude: 35,
+                longitude: 139
+            },
+            zoom: 8,
+        };
 
     $scope.wifimarkers = [];
 
     getFavoritePlaces();
 
     uiGmapGoogleMapApi.then(function(maps) {
-    	maps.events = {
-        	click: function(maps, eventName, args) {
-        		console.log(maps, eventName, args)
-        	},
-        	mouseover: function(maps, eventName, args) {
-        		console.log(maps, eventName, args)
-        	},
+        maps.events = {
+            click: function(maps, eventName, args) {
+                console.log(maps, eventName, args)
+            },
+            mouseover: function(maps, eventName, args) {
+                console.log(maps, eventName, args)
+            },
         }
     });
 
     function getFavoritePlaces() {
-    	$http({
-    		method: "GET",
-    		url: baseURL + "bearcat/_all_docs"
-    	}).then(function successCallback(response){
-    		$scope.markers = [{
-    			id: 111, 
-    			coords: {
-    				latitude: 35.123,
-    				longitude: 139.12,
-    			}
-    		}, {
-    			id: 222,
-    			coords: {
-    				latitude: 35.42,
-    				longitude: 139.45,
-    			}
-    		}];
-    		// $scope.wifimarkers = response
-    	}, function errorCallback(response){
-    		console.error("error: ", response)
-    	})
-    }
-    function getWifies() {
+        $http({
+            method: "GET",
+            url: baseURL + "bearcat/_all_docs"
+        }).then(function successCallback(response) {
+            $scope.markers = [{
+                id: 111,
+                name: "べとなむちゃん",
+                coords: {
+                    latitude: 35.123,
+                    longitude: 139.12,
+                },
+                options: {
+                    icon: {
+                        url: "images/restaurent.png",
+                        scaledSize: new google.maps.Size(34, 44)
+                    }
 
-        return [{
-            id: 0,
-            coords: {
-                latitude: 45,
-                longitude: -73
-            }
-        }, {
-            id: 1,
-            coords: {
-                latitude: 45.7,
-                longitude: -73.2
-            }
-        }, {
-            id: 2,
-            coords: {
-                latitude: 45.1,
-                longitude: -73.9
-            }
-        }]
+                }
+
+            }, {
+                id: 222,
+                name: "東京大学",
+                coords: {
+                    latitude: 35.42,
+                    longitude: 139.45,
+                },
+                options: {
+                    icon: {
+                        url: "images/restaurent.png",
+                        scaledSize: new google.maps.Size(34, 44)
+                    }
+                }
+            }];
+            // $scope.wifimarkers = response
+        }, function errorCallback(response) {
+            console.error("error: ", response)
+        })
+    }
+
+    function getWifies() {
+        $http({
+            method: "GET",
+            url: baseURL + "bearcat/_all_docs"
+        }).then(function successCallback(response) {
+            // $scope.wifimarkers = response
+        }, function errorCallback(response) {
+            console.error("error: ", response)
+        })
     }
 
 }]);
