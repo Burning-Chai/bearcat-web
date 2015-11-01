@@ -1,6 +1,6 @@
 <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-    <div ng-repeat="wifi in wifimarkers">
-        <ui-gmap-marker coords="wifi.coords" events="marker.events" idkey="wifi.id">
+    <div ng-repeat="marker in markers">
+        <ui-gmap-marker coords="marker.coords" events="marker.events" idkey="marker.id">
             <ui-gmap-window options='windowOptions' templateUrl='view1/windowtemplates/wifi_template.html'>
                 <div>{{wifi.coords}}</div>
             </ui-gmap-window>

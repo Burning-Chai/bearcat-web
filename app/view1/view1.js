@@ -10,25 +10,19 @@ angular.module('myApp.view1', ['ngRoute'])
 }])
 
 .controller('View1Ctrl', ['$scope', '$http', 'uiGmapGoogleMapApi', function($scope, $http, uiGmapGoogleMapApi) {
+	var baseURL = "http://52.68.184.153:4984/";
+
     $scope.map = {
         center: {
-            latitude: 45,
-            longitude: -73
+            latitude: 35,
+            longitude: 139
         },
         zoom: 8,
-        events: {
-        	click: function(maps, eventName, args) {
-        		console.log(maps, eventName, args)
-        	},
-        	mouseover: function(maps, eventName, args) {
-        		console.log(maps, eventName, args)
-        	},
-        }
     };
 
-    $scope.wifimarkers = getWifies();
+    $scope.wifimarkers = [];
 
-
+    getFavoritePlaces();
 
     uiGmapGoogleMapApi.then(function(maps) {
     	maps.events = {
@@ -41,7 +35,29 @@ angular.module('myApp.view1', ['ngRoute'])
         }
     });
 
-
+    function getFavoritePlaces() {
+    	$http({
+    		method: "GET",
+    		url: baseURL + "bearcat/_all_docs"
+    	}).then(function successCallback(response){
+    		$scope.markers = [{
+    			id: 111, 
+    			coords: {
+    				latitude: 35.123,
+    				longitude: 139.12,
+    			}
+    		}, {
+    			id: 222,
+    			coords: {
+    				latitude: 35.42,
+    				longitude: 139.45,
+    			}
+    		}];
+    		// $scope.wifimarkers = response
+    	}, function errorCallback(response){
+    		console.error("error: ", response)
+    	})
+    }
     function getWifies() {
 
         return [{
